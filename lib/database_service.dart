@@ -1,6 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 
-void createUser(String name, int age, String address, String email) {
+void createUser(String name, String age, String address, String email) {
   DatabaseReference user =
       FirebaseDatabase.instance.ref().child('person').push();
   user.set({'name': name, 'age': age, 'address': address, 'email': email});

@@ -4,7 +4,7 @@ import 'database_service.dart';
 
 class NextPage extends StatefulWidget {
   final String name;
-  final int age;
+  final String age;
 
   const NextPage({Key? key, required this.name, required this.age})
       : super(key: key); // Modified
@@ -39,6 +39,12 @@ class _NextPageState extends State<NextPage> {
             keyboardType: TextInputType.multiline,
           ),
           ElevatedButton(
+              onPressed: () {
+                print('Nama: ${widget.name}');
+                print(widget.age);
+              },
+              child: Text('Print age,name')),
+          ElevatedButton(
             onPressed: () {
               if (emailController.text.isEmpty ||
                   addressController.text.isEmpty) {
@@ -55,6 +61,10 @@ class _NextPageState extends State<NextPage> {
                     content: Text(
                   'User created successfully',
                 )));
+                print(widget.name);
+                print(widget.age);
+                print(addressController.text);
+                print(emailController.text);
               } catch (e) {
                 print(e);
               }

@@ -38,8 +38,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _ageController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController ageController = TextEditingController();
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    ageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,36 +61,36 @@ class _MyHomePageState extends State<MyHomePage> {
             decoration: const InputDecoration(
               labelText: 'Name',
             ),
-            controller: _nameController,
+            controller: nameController,
           ),
           TextField(
             decoration: const InputDecoration(
               labelText: 'Age',
             ),
             keyboardType: TextInputType.number,
-            controller: _ageController,
+            controller: ageController,
           ),
           ElevatedButton(
               onPressed: () {
-                if (_nameController.text.isEmpty ||
-                    _ageController.text.isEmpty) {
+                if (nameController.text.isEmpty || ageController.text.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
-                        content: Text('Name and Age cannot be empty')),
+                        content: Text(
+                            'Name and Age cannot be empty and Age must be a valid number')),
                   );
                   return;
                 }
+                print(nameController.text);
+                print(ageController.text);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => NextPage(
-                      name: _nameController.text,
-                      age: int.parse(_ageController.text),
+                      name: nameController.text,
+                      age: ageController.text,
                     ),
                   ),
                 );
-                _nameController.clear();
-                _ageController.clear();
               },
               child: Text('Berikutnya')),
           // ElevatedButton(
@@ -118,12 +125,5 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _nameController.dispose();
-    _ageController.dispose();
-    super.dispose();
   }
 }
