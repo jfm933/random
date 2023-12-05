@@ -121,7 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => ReadData()));
               },
-              child: Text("Read Data"))
+              child: Text("Read User"))
         ],
       ),
     );
